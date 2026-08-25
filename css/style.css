@@ -139,9 +139,20 @@ button:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--border-soft);
+}
+/* Lo sfondo sfumato/blur vive su uno pseudo-elemento: se il backdrop-filter
+   fosse sull'header stesso, diventerebbe containing block per i discendenti
+   position:fixed (es. il pannello nav mobile), schiacciandoli nell'altezza
+   dell'header invece di coprire tutto lo schermo. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(247, 240, 226, 0.92);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-soft);
+  -webkit-backdrop-filter: blur(10px);
 }
 .header-inner {
   display: flex;
